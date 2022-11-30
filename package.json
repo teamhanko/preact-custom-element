@@ -6,8 +6,9 @@
 	"module": "dist/preact-custom-element.esm.js",
 	"unpkg": "dist/preact-custom-element.umd.js",
 	"source": "src/index.js",
+	"types": "dist/index.d.ts",
 	"scripts": {
-		"prepare": "microbundle",
+		"prepare": "microbundle -no-generateTypes && npx --yes cpy-cli 'src/*.d.ts' 'dist'",
 		"lint": "eslint src/*.{js,jsx}",
 		"test": "wtr src/*.test.{js,jsx}",
 		"test:browsers": "wtr src/*.test.{js,jsx} --playwright --browsers chromium firefox webkit",
@@ -15,6 +16,9 @@
 		"prepublishOnly": "npm run lint && npm run test"
 	},
 	"eslintConfig": {
+		"ignorePatterns": [
+			"index.d.ts"
+		],
 		"extends": "developit",
 		"settings": {
 			"react": {
